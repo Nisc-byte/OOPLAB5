@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+
+class CentralBank {
+protected:
+    float ird;
+    float irl;
+public:
+    virtual void getdata() = 0;
+    virtual void displaydata() = 0;
+    virtual void calculateInterestAmount(float amount, int years) = 0;
+    virtual ~CentralBank() {}
+};
+
+class NMB : public CentralBank {
+public:
+    void getdata() {
+        cout << "NMB Bank" << endl;
+        cout << "Enter interest rate for deposit: ";
+        cin >> ird;
+        cout << "Enter interest rate for loan: ";
+        cin >> irl;
+    }
+
+    void displaydata() {
+        cout << "NMB Bank Rates:" << endl;
+        cout << "Deposit Interest Rate: " << ird << "%" << endl;
+        cout << "Loan Interest Rate: " << irl << "%" << endl;
+    }
+
+    void calculateInterestAmount(float amount, int years) {
+        float depositInterest = (amount * ird * years) / 100;
+        float loanInterest = (amount * irl * years) / 100;
+        cout << "Interest on Deposit: " << depositInterest << endl;
+        cout << "Interest on Loan: " << loanInterest << endl;
+    }
+};
+
+class GlobalBank : public CentralBank {
+public:
+    void getdata() {
+        cout << "Global Bank" << endl;
+        cout << "Enter interest rate for deposit: ";
+        cin >> ird;
+        cout << "Enter interest rate for loan: ";
+        cin >> irl;
+    }
+
+    void displaydata() {
+        cout << "Global Bank Rates:" << endl;
+        cout << "Deposit Interest Rate: " << ird << "%" << endl;
+        cout << "Loan Interest Rate: " << irl << "%" << endl;
+    }
+
+    void calculateInterestAmount(float amount, int years) {
+        float depositInterest = (amount * ird * years) / 100;
+        float loanInterest = (amount * irl * years) / 100;
+        cout << "Interest on Deposit: " << depositInterest << endl;
+        cout << "Interest on Loan: " << loanInterest << endl;
+    }
+};
+
+int main() {
+    CentralBank* bank;
+
+    cout << "\nUsing NMB\n";
+    bank = new NMB;
+    bank->getdata();
+    bank->displaydata();
+    bank->calculateInterestAmount(10000, 2);
+    delete bank;
+
+    cout << "\nUsing GlobalBank\n";
+    bank = new GlobalBank;
+    bank->getdata();
+    bank->displaydata();
+    bank->calculateInterestAmount(15000, 3);
+    delete bank;
+
+    return 0;
+}
