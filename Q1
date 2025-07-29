@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Fmachine {
+public:
+    virtual void getdata() = 0;
+    virtual void putdata() = 0;
+    virtual ~Fmachine() {}
+};
+
+class Aeroplane : public Fmachine {
+private:
+    int code;
+    string name;
+    int capacity;
+public:
+    void getdata() {
+        cout << "Enter code: ";
+        cin >> code;
+        cin.ignore();
+        cout << "Enter name: ";
+        getline(cin, name);
+        cout << "Enter capacity: ";
+        cin >> capacity;
+    }
+
+    void putdata() {
+        cout << "Aeroplane Code: " << code << endl;
+        cout << "Name: " << name << endl;
+        cout << "Capacity: " << capacity << endl;
+    }
+};
+
+int main() {
+    Fmachine* ptr = new Aeroplane;
+    ptr->getdata();
+    ptr->putdata();
+    delete ptr;
+    return 0;
+}
